@@ -173,120 +173,116 @@ class Average:
 # METRIC FUNCTIONS
 # ==============================================================================
 
-def bert(items):
+def bert(predictions, references):
     """
     Compute BERTScore using the default English BERT model.
-    
+
     Uses google-bert/bert-base-uncased for semantic similarity evaluation.
     Good for evaluating English-side translation quality.
-    
+
     Args:
-        items: List of (prediction, reference) tuples
-        
+        predictions: List of predicted translation strings
+        references: List of reference translation strings
+
     Returns:
         Average F1 score from BERTScore
-        
+
     Example:
-        items = [
-            ("Hello, how are you?", "Hi, how are you doing?"),
-            ("Good morning", "Good morning")
-        ]
+        predictions = ["Hello, how are you?", "Good morning"]
+        references = ["Hi, how are you doing?", "Good morning"]
         # Returns average BERTScore F1 ~0.95
     """
     bert_model = "google-bert/bert-base-uncased"
     bert_score = evaluate.load("bertscore")
-    predictions, references = zip(*items)
-    
+
     result = bert_score.compute(
         predictions=predictions,
         references=references,
         model_type=bert_model,
         num_layers=12,
     )
-    
+
     # Extract and average F1 scores
     return Average(result["f1"])
 
 
-def arabert(items):
+def arabert(predictions, references):
     """
     Compute BERTScore using AraBERT (Arabic-specialized BERT).
-    
+
     Uses aubmindlab/bert-base-arabert which is trained specifically
     for Arabic NLP tasks. Better captures Arabic morphology and syntax.
-    
+
     Args:
-        items: List of (prediction, reference) tuples
-        
+        predictions: List of predicted translation strings
+        references: List of reference translation strings
+
     Returns:
         Average F1 score from AraBERT-based BERTScore
-        
+
     Example:
-        items = [
-            ("كيفك يا حبيبي", "كيفك يا صديقي"),  # Egyptian Arabic variants
-            ("أنا بخير", "أنا تمام")
-        ]
+        predictions = ["كيفك يا حبيبي", "أنا بخير"]
+        references = ["كيفك يا صديقي", "أنا تمام"]
         # Returns average AraBERT F1 score ~0.92
     """
     bert_model = "aubmindlab/bert-base-arabert"
     bert_score = evaluate.load("bertscore")
-    predictions, references = zip(*items)
-    
+
     result = bert_score.compute(
         predictions=predictions,
         references=references,
         model_type=bert_model,
         num_layers=12,
     )
-    
+
     return Average(result["f1"])
 
 
-def mbert(items):
+def mbert(predictions, references):
     """
     Compute BERTScore using Multilingual BERT.
-    
+
     Uses google-bert/bert-base-multilingual-cased which handles
     both English and Arabic. Useful for overall translation quality
     without language-specific bias.
-    
+
     Args:
-        items: List of (prediction, reference) tuples
-        
+        predictions: List of predicted translation strings
+        references: List of reference translation strings
+
     Returns:
         Average F1 score from Multilingual BERTScore
-        
+
     Example:
-        items = [
-            ("كيف حالك؟", "How are you?"),  # Cross-lingual pair
-        ]
+        predictions = ["كيف حالك؟"]
+        references = ["How are you?"]
         # Returns average mBERT F1 score ~0.88
     """
     bert_model = "google-bert/bert-base-multilingual-cased"
     bert_score = evaluate.load("bertscore")
-    predictions, references = zip(*items)
-    
+
     result = bert_score.compute(
         predictions=predictions,
         references=references,
         model_type=bert_model,
         num_layers=12,
     )
-    
+
     return Average(result["f1"])
 
 
-def bertbase(items):
+def bertbase(predictions, references):
     """
     Alias for bert() - compute BERTScore using English BERT.
-    
+
     Provided for consistency with other translation tasks in the framework.
     Used as aggregation function in metric_list.
-    
+
     Args:
-        items: List of scores to average
-        
+        predictions: List of predicted translation strings
+        references: List of reference translation strings
+
     Returns:
         Average BERTScore using base English BERT
     """
-    return bert(items)
+    return bert(predictions, references)
