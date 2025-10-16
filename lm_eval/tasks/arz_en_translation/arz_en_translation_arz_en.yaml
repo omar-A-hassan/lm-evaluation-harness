@@ -1,5 +1,5 @@
 process_docs: !function utils.arz_en
-doc_to_text: "Egyptian Arabic phrase: {{arz}}\nEnglish phrase:"
+doc_to_text: "{{arz}}"
 doc_to_target: "{{en}}"
 
 include:
