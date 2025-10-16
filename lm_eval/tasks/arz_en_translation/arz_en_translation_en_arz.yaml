@@ -12,6 +12,10 @@ task: "arz_en_translation_en_arz"
 task_alias: "en_arz"
 output_type: generate_until
 
+# Force NLLB to generate Egyptian Arabic (arz_Arab token)
+generation_kwargs:
+  forced_bos_token_id: 256014
+
 metric_list:
   - metric: bleu
     higher_is_better: true
