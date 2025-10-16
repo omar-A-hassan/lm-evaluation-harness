@@ -1,0 +1,9 @@
+include:
+  - arz_en_translation_en_arz.yaml
+  - arz_en_translation_arz_en.yaml
+
+tag:
+  - "arz_en_translation_tasks"
+
+task: "arz_en_translation_all"
+task_alias: "arz_en_all"

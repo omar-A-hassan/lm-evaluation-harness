@@ -1,0 +1,27 @@
+# Common configuration shared by all Egyptian Arabic ↔ English translation tasks
+# This file is included by specific direction tasks using !include directives
+
+dataset_path: IbrahimAmin/arz-en-parallel-corpus
+dataset_name: default
+
+# Process documents through the appropriate filter for direction
+process_docs: |
+  lambda dataset, task_name: dataset
+
+# Metric configuration for translation evaluation
+metric_names:
+  - bleu  # Standard BLEU score (0-100)
+  - ter   # Translation Error Rate (0-100, lower is better)
+  - chrf  # Character F-score (0-100)
+  - bert  # English BERT-based semantic similarity
+  - arabert  # Arabic BERT-based semantic similarity
+  - mbert  # Multilingual BERT-based semantic similarity
+
+# Generation parameters for the model
+generation_kwargs:
+  max_length: 256
+  num_beams: 5
+
+# Stopping criteria to prevent model from generating excessively
+stopping_sequences:
+  - "\n"

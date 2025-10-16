@@ -1,0 +1,30 @@
+process_docs: !function utils.en_arz
+
+include:
+  - arz_en_common_yaml
+
+tag:
+  - "arz_en_translation_tasks"
+
+task: "arz_en_translation_en_arz"
+task_alias: "en_arz"
+
+metric_list:
+  - metric: !function utils.bert
+    aggregation: !function utils.bertbase
+    higher_is_better: true
+  - metric: bleu
+    aggregation: mean
+    higher_is_better: true
+  - metric: ter
+    aggregation: mean
+    higher_is_better: false
+  - metric: chrf
+    aggregation: mean
+    higher_is_better: true
+  - metric: !function utils.arabert
+    aggregation: mean
+    higher_is_better: true
+  - metric: !function utils.mbert
+    aggregation: mean
+    higher_is_better: true
