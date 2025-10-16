@@ -10,3 +10,7 @@ Tasks:
 - arz_en: Egyptian Arabic → English translation  
 - arz_en_all: Combined bidirectional translation evaluation
 """
+
+# This file is intentionally left mostly empty.
+# Task discovery is handled by the lm-eval framework through YAML files.
+__all__ = []
