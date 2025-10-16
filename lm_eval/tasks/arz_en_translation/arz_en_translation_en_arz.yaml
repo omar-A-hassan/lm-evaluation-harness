@@ -1,4 +1,6 @@
 process_docs: !function utils.en_arz
+doc_to_text: "English phrase: {{en}}\nEgyptian Arabic phrase:"
+doc_to_target: "{{arz}}"
 
 include:
   - arz_en_common_yaml
@@ -8,6 +10,7 @@ tag:
 
 task: "arz_en_translation_en_arz"
 task_alias: "en_arz"
+output_type: generate_until
 
 metric_list:
   - metric: !function utils.bert
