@@ -12,7 +12,3 @@ process_docs: |
 generation_kwargs:
   max_length: 256
   num_beams: 5
-
-# Stopping criteria to prevent model from generating excessively
-stopping_sequences:
-  - "\n"
