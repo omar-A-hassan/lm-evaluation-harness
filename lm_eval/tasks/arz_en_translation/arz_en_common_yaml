@@ -3,6 +3,7 @@
 
 dataset_path: IbrahimAmin/arz-en-parallel-corpus
 dataset_name: default
+test_split: test
 
 # Process documents through the appropriate filter for direction
 process_docs: |
@@ -12,3 +13,5 @@ process_docs: |
 generation_kwargs:
   max_length: 256
   num_beams: 5
+  until:
+    - "\n"
